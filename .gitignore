@@ -488,3 +488,5 @@ Reactivities/Get Activities.bru
 Reactivities/environments/Reactivities.bru
 API/appsettings.json
 API/reactivities.db
+API/reactivities.db-shm
+API/reactivities.db-wal
