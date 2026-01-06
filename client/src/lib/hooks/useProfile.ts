@@ -93,7 +93,7 @@ export const useProfile = (id?: string) => {
 
     const updateProfile = useMutation({
         mutationFn: async (profile: EditProfileSchema) => {
-            await agent.put('/profiles', profile)
+            await agent.put(`/profiles/${id}`, profile)
         },
         onSuccess: async (_, profile) => {
             queryClient.setQueryData(['profile', id], (data: Profile) => {

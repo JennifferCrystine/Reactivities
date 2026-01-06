@@ -13,7 +13,9 @@ public class EditProfile
 {
     public class Command : IRequest<Result<Unit>>
     {
-        public required UserProfile UserProfile { get; set; }
+        public string Id { get; set; } = "";
+        public required string DisplayName { get; set; }
+        public string? Bio { get; set; }
 
         public class Handler(AppDbContext context, IUserAccessor userAccessor) : IRequestHandler<Command, Result<Unit>>
         {
@@ -21,15 +23,15 @@ public class EditProfile
             {
                 var user = await userAccessor.GetUserAsync();
 
-                if (user.Id != request.UserProfile.Id) return Result<Unit>.Failure("Profile not found", 404);
+                if (user.Id != request.Id) return Result<Unit>.Failure("Profile not found", 404);
 
                 var profile = await context.Users
-                    .SingleOrDefaultAsync(x => x.Id == request.UserProfile.Id, cancellationToken: cancellationToken);
+                    .SingleOrDefaultAsync(x => x.Id == request.Id, cancellationToken: cancellationToken);
 
                 if (profile == null) return Result<Unit>.Failure("Profile not found", 404);
 
-                profile.DisplayName = request.UserProfile.DisplayName;
-                profile.Bio = request.UserProfile.Bio;
+                profile.DisplayName = request.DisplayName;
+                profile.Bio = request.Bio;
                 
                 var result = await context.SaveChangesAsync(cancellationToken) > 0;
 

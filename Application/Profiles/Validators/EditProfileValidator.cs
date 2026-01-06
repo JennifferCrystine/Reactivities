@@ -9,7 +9,7 @@ public class EditProfileValidator : AbstractValidator<EditProfile.Command>
 {
     public EditProfileValidator()
     {
-        RuleFor(x => x.UserProfile.DisplayName)
+        RuleFor(x => x.DisplayName)
             .NotEmpty();
     }
 }

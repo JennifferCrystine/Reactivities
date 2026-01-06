@@ -4,6 +4,7 @@ using Application.Profiles.DTOs;
 using Application.Profiles.Queries;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.Differencing;
 
 namespace API;
 
@@ -39,9 +40,10 @@ public class ProfilesController : BaseApiController
         return HandleResult(await Mediator.Send(new GetProfile.Query { UserId = userId }));
     }
 
-    [HttpPut]
-    public async Task<ActionResult> EditProfileAsync(UserProfile userProfile)
+    [HttpPut("{id}")]
+    public async Task<ActionResult> EditProfileAsync([FromRoute] string id, EditProfile.Command command)
     {
-        return HandleResult(await Mediator.Send(new EditProfile.Command { UserProfile = userProfile }));
+        command.Id = id;
+        return HandleResult(await Mediator.Send(command));
     }
 }
