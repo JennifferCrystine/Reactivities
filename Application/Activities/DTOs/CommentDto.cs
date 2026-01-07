@@ -1,5 +1,3 @@
-using System;
-
 namespace Application.Activities.DTOs;
 
 public class CommentDto
@@ -10,6 +8,5 @@ public class CommentDto
     public required string UserId { get; set; }
     public required string DisplayName { get; set; }
     public string? ImageUrl { get; set; }
-
 
 }
