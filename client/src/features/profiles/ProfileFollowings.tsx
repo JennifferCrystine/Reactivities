@@ -28,7 +28,6 @@ export default function ProfileFollowings({activeTab}: Props) {
                         <ProfileCard  key={profile.id} profile={profile}/>
                     ))}
                 </Box>
-
             )}
         </Box>
     )
