@@ -1,12 +1,10 @@
-using API.Controllers;
 using Application.Profiles.Commands;
 using Application.Profiles.DTOs;
 using Application.Profiles.Queries;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.Differencing;
 
-namespace API;
+namespace API.Controllers;
 
 public class ProfilesController : BaseApiController
 {
@@ -58,4 +56,11 @@ public class ProfilesController : BaseApiController
     {
         return HandleResult(await Mediator.Send(new GetFollowings.Query{ UserId = userId, Predicate = predicate }));
     }
+
+    [HttpGet("{userId}/activities")]
+    public async Task<ActionResult> GetUserActivitiesAsync(string userId, [FromQuery] string filter)
+    {
+        return HandleResult(await Mediator.Send(new GetUserActivities.Query{ UserId = userId, Filter = filter }));
+    }
+
 }
