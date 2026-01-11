@@ -26,12 +26,12 @@ export const useProfile = (id?: string, predicate?: string) => {
     });
 
     const {data: userActivities, isLoading: loadingUserActivities} = useQuery<Activity[]>({
-        queryKey: ['user-activities', filter],
+        queryKey: ['user-activities', id, filter],
         queryFn: async () => {
             const response = await agent.get<Activity[]>(`/profiles/${id}/activities?filter=${filter}`);
             return response.data
         },
-        enabled: !!id && !filter
+        enabled: !!id && !!filter
     });
 
     const {data: followings, isLoading: loadingFollowings} = useQuery<Profile[]>({
