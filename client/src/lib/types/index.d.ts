@@ -22,13 +22,6 @@ type Activity = {
     hostImageUrl?: string    
 }
 
-type UserActivity = {
-  id: string,
-  title: string,
-  category: string,
-  date: Date
-}
-
 type Profile = {
   id: string
   displayName: string
