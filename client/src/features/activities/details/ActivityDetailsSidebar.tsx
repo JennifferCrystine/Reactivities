@@ -1,4 +1,4 @@
-import { Paper, Typography, List, ListItem, Chip, ListItemAvatar, Avatar, ListItemText, Grid2 } from "@mui/material";
+import { Paper, Typography, List, ListItem, Chip, ListItemAvatar, Avatar, ListItemText, Grid } from "@mui/material";
 import { Link } from "react-router";
 
 type Props = {
@@ -24,8 +24,8 @@ export default function ActivityDetailsSidebar({activity}: Props) {
             </Paper>
             <Paper sx={{ padding: 2 }}>
                 {activity.attendees.map(attendee => (
-                    <Grid2 key={attendee.id} container alignItems="center">
-                    <Grid2 size={8}>
+                    <Grid key={attendee.id} container alignItems="center">
+                    <Grid size={8}>
                         <List sx={{ display: 'flex', flexDirection: 'column' }}>
                             <ListItem component={Link} to={`/profiles/${attendee.id}`}>
                                 <ListItemAvatar>
@@ -46,8 +46,8 @@ export default function ActivityDetailsSidebar({activity}: Props) {
                                 </ListItemText>
                             </ListItem>
                         </List>
-                    </Grid2>
-                    <Grid2 size={4} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 1 }}>
+                    </Grid>
+                    <Grid size={4} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 1 }}>
                         {activity.hostId === attendee.id && (
                             <Chip
                                 label="Host"
@@ -56,8 +56,8 @@ export default function ActivityDetailsSidebar({activity}: Props) {
                                 sx={{borderRadius: 2}}
                             />
                         )}                        
-                    </Grid2>
-                </Grid2>
+                    </Grid>
+                </Grid>
                 ))}                
             </Paper>
         </>
