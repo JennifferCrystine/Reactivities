@@ -1,4 +1,4 @@
-import { Grid2, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import ProfileHeader from "./ProfileHeader";
 import ProfileContent from "./ProfileContent";
 import { useParams } from "react-router";
@@ -13,11 +13,11 @@ export default function ProfilePage() {
   if (!profile) return <Typography>Profile not found.</Typography>
 
   return (
-    <Grid2 container>
-        <Grid2 size={12}>
+    <Grid container>
+        <Grid size={12}>
             <ProfileHeader />
             <ProfileContent />
-        </Grid2>
-    </Grid2>
+        </Grid>
+    </Grid>
   )
 }

@@ -1,11 +1,11 @@
 import { FormControl, FormHelperText, InputLabel, MenuItem, Select } from "@mui/material";
-import type { SelectInputProps } from "@mui/material/Select/SelectInput";
+import type { SelectProps } from "@mui/material/Select";
 import { useController, type FieldValues, type UseControllerProps } from "react-hook-form"
 
 type Props<T extends FieldValues> = {
     items: {text: string, value: string}[];
     label: string;
-} & UseControllerProps<T> & Partial<SelectInputProps>
+} & UseControllerProps<T> & Partial<SelectProps>
 
 export default function SelectInput<T extends FieldValues>(props: Props<T>) {
     const { field, fieldState } = useController({...props});

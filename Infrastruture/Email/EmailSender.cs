@@ -2,11 +2,12 @@ using System;
 using Domain;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Resend;
 
 namespace Infrastruture.Email;
 
-public class EmailSender(IEmailClient emailClient, IConfiguration configuration) : IEmailSender<User>
+public class EmailSender(IServiceScopeFactory scopeFactory, IConfiguration configuration) : IEmailSender<User>
 {
     public async Task SendConfirmationLinkAsync(User user, string email, string confirmationLink)
     {
@@ -45,6 +46,8 @@ public class EmailSender(IEmailClient emailClient, IConfiguration configuration)
 
     private async Task SendMailAsync(string email, string subject, string body)
     {
+        using var scope = scopeFactory.CreateScope();
+        var resend = scope.ServiceProvider.GetRequiredService<IResend>();
         var message = new EmailMessage
         {
           From = "whatever@resend.dev",
@@ -55,7 +58,6 @@ public class EmailSender(IEmailClient emailClient, IConfiguration configuration)
         message.To.Add(email);
         Console.WriteLine(message.HtmlBody);
 
-        await emailClient.SendAsync(message);
-        // await Task.CompletedTask;
+        await resend.EmailSendAsync(message);
     }
 }

@@ -2,7 +2,7 @@ import { useEffect, useState, type SyntheticEvent } from "react"
 import { Link, useParams } from "react-router";
 import { useProfile } from "../../lib/hooks/useProfile";
 import { Box } from "@mui/system";
-import { Card, CardContent, CardMedia, Grid2, Tab, Tabs, Typography } from "@mui/material";
+import { Card, CardContent, CardMedia, Grid, Tab, Tabs, Typography } from "@mui/material";
 import { format } from "date-fns";
 
 export default function ProfileActivity() {
@@ -27,7 +27,7 @@ export default function ProfileActivity() {
 
     return (
         <Box>
-            <Grid2 container spacing={2}>
+            <Grid container spacing={2}>
                 <Tabs 
                     value={activeTab}
                     onChange={handleTabChange}   
@@ -36,13 +36,13 @@ export default function ProfileActivity() {
                         <Tab label={tab.menuItem} key={index} />
                     ))}
                 </Tabs>
-            </Grid2>
+            </Grid>
             {(!userActivities || userActivities.length === 0 && !loadingUserActivities) ? (
                 <Typography mt={2}>
                     No activities to show
                 </Typography>
             ) : null}
-            <Grid2
+            <Grid
                 container
                 spacing={2}
                 sx={{
@@ -52,7 +52,7 @@ export default function ProfileActivity() {
                 }}
             >
                  {userActivities && userActivities.map((activity: Activity) => (
-                    <Grid2 size={2} key={activity.id}>
+                    <Grid size={2} key={activity.id}>
                         <Link to={`/activities/${activity.id}`} 
                         style={{ textDecoration: 'none' }}>
                             <Card elevation={4}>
@@ -83,9 +83,9 @@ export default function ProfileActivity() {
                                 </CardContent>
                             </Card>
                         </Link>
-                    </Grid2>
+                    </Grid>
                 ))}
-            </Grid2>
+            </Grid>
         </Box>
     )
 }
